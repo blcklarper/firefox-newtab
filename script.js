@@ -498,9 +498,13 @@ input.addEventListener('keydown', function (e) {
         }
 
         if (browserApi?.search?.query) {
+            // Chrome / Chromium
             browserApi.search.query({ text: val, disposition: 'CURRENT_TAB' });
+        } else if (browserApi?.search?.search) {
+            // Firefox / LibreWolf (uses the browser's default search engine)
+            browserApi.search.search({ query: val, disposition: 'CURRENT_TAB' });
         } else {
-            const defaultSearch = config.search?.default || 'https://google.com/search?q=';
+            const defaultSearch = config.search?.default || 'https://duckduckgo.com/?q=';
             window.location.href = defaultSearch + encodeURIComponent(val);
         }
     } else if (e.key === 'Escape') {
