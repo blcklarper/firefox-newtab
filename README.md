@@ -25,7 +25,20 @@ The add-on is removed when the browser restarts.
 
 ### Permanent install on regular Firefox
 
-Firefox only installs signed add-ons. Upload the `.zip` as an **unlisted** add-on on [addons.mozilla.org](https://addons.mozilla.org/developers/), download the signed `.xpi`, then install it from `about:addons`.
+Firefox (Release) only installs signed add-ons, so the add-on has to be signed by Mozilla. It's free and the add-on stays private:
+
+1. Go to [addons.mozilla.org/developers](https://addons.mozilla.org/developers/) and sign in with a Firefox account.
+2. Click **Submit a New Add-on**.
+3. Choose **On your own** (unlisted), so it is not published.
+4. Upload `firefox-newtab.zip`. Automatic signing usually takes a few minutes.
+5. Download the signed `.xpi`.
+6. In Firefox open `about:addons`, click the gear icon, then **Install Add-on From File...** and select the `.xpi`.
+
+If AMO rejects the add-on ID, change `browser_specific_settings.gecko.id` in `manifest.json` to your own (e.g. `newtab@yourname.dev`) and upload again.
+
+### Unsigned install (Developer Edition, Nightly, ESR)
+
+These builds allow unsigned add-ons: set `xpinstall.signatures.required` to `false` in `about:config`, then install the `.zip` from `about:addons`. This preference is ignored on Firefox Release.
 
 ## Changes from the Chromium version
 
